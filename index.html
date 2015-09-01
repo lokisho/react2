@@ -17,16 +17,14 @@
 	  render: function() 
 	  {
 	    return  ( <div className="commentBox">
-		      Hello, world! I am a CommentBox.
+			<h1>Comments</h1>
+			<CommentList />
+			<CommentForm />
 		      </div>
 		    );
 	  }
 	}
       );
-      React.render  (	<CommentBox />
-		    ,	document.getElementById('content')
-		    );
-    
       var CommentList = React.createClass
       (
 	{
@@ -52,6 +50,25 @@
 	  }
 	}
       );
+      var Comment = React.createClass
+      (
+	{
+	  render: function() 
+	  {
+	    return  ( <div className="comment">
+			<h2 className="commentAuthor">
+			  {this.props.author}
+			</h2>
+			{this.props.children}
+		      </div>
+		    );
+	  }
+	}
+      );
+      React.render  (	<CommentBox />
+		    ,	document.getElementById('content')
+		    );
+    
     </script>
   </body>
 </html>
