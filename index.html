@@ -57,11 +57,14 @@
 	{
 	  render: function() 
 	  {
+	    /*This sanitizes data to be safed to used later */
+	    var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+	    //We used the sanitized data 
 	    return  ( <div className="comment">
 			<h2 className="commentAuthor">
 			  {this.props.author}
 			</h2>
-			{marked(this.props.children.toString())}
+			<span dangerouslySetInnerHTML={{__html: rawMarkup}} />
 		      </div>
 		    );
 	  }
