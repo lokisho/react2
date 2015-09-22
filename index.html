@@ -49,7 +49,23 @@
 	  }
 	, handleCommentSubmit:	function(comment)
 	  {
-	    //TODO  : submit to the server and refresh the list
+	    $.ajax
+	    (
+	      {
+		  url:	    this.props.url
+		, dataType: 'json'
+		, type:	    'POST'
+		, data:	    comment
+		, success:  function(data)
+			    {
+			      this.setState({data:data});
+			    }.bind(this)
+		, error:    function(xhr, status, err)
+			    {
+			      console.error(this.props.url, status, err.toString());
+			    }.bind(this)
+	      }
+	    );
 	  }
 	, getInitialState: function() 
 	  {
@@ -114,8 +130,8 @@
 	, render: function() 
 	  {
 	    return  ( <form className="commentForm" onSubmit={this.handleSubmit}>
-		      <input type="text" placeholder="Your name" />
-		      <input type="text" placeholder="Say something..." />
+		      <input type="text" placeholder="Your name" ref="author" />
+		      <input type="text" placeholder="Say something..." ref="text" />
 		      <input type="submit" value="Post" />
 		      </form>
 		    );
